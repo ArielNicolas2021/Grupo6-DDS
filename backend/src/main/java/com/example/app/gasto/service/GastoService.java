@@ -136,7 +136,23 @@ public class GastoService {
         return toResponseDTO(gasto);
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────────────
+    // Eliminar
+
+    public void eliminar(Long id) {
+        Usuario usuario = getUsuarioAutenticado();
+
+        Gasto gasto = gastoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Gasto", id));
+
+        if (!gasto.getUsuario().getId().equals(usuario.getId())) {
+            throw new UnauthorizedAccessException("Gasto", id);
+        }
+
+        gastoRepository.delete(gasto);
+        log.info("Gasto eliminado -> id: {}, usuario: {}", id, usuario.getEmail());
+    }
+
+    // Helpers ──────────────────────────────────────────────────────────────
 
     /**
      * Extrae el email del principal autenticado (cargado por JwtAuthenticationFilter)

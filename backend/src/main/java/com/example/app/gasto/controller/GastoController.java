@@ -91,4 +91,21 @@ public class GastoController {
     public ResponseEntity<GastoResponseDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(gastoService.buscarPorId(id));
     }
+
+    /**
+     * DELETE /api/gastos/{id}
+     *
+     * Elimina un gasto del usuario autenticado.
+     *
+     * Responses:
+     *   204 No Content  -> gasto eliminado correctamente (sin body)
+     *   401 Unauthorized-> token ausente o invalido
+     *   403 Forbidden   -> el gasto pertenece a otro usuario
+     *   404 Not Found   -> gasto inexistente
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        gastoService.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
 }
