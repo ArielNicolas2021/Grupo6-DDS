@@ -1,6 +1,7 @@
 package com.example.app.exception;
 
 import com.example.app.auth.dto.ApiErrorResponseDTO;
+import com.example.app.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,6 +76,24 @@ public class GlobalExceptionHandler {
             ApiErrorResponseDTO.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error("Bad Request")
+                .mensaje(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build()
+        );
+    }
+
+    /**
+     * 404 Not Found — recurso no encontrado (Categoria, Usuario, etc.)
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiErrorResponseDTO> handleResourceNotFound(
+            ResourceNotFoundException ex, HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            ApiErrorResponseDTO.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .error("Not Found")
                 .mensaje(ex.getMessage())
                 .timestamp(LocalDateTime.now())
                 .path(request.getRequestURI())
