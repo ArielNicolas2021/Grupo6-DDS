@@ -1,6 +1,7 @@
 package com.example.app.gasto.controller;
 
 import com.example.app.gasto.dto.GastoRequestDTO;
+import com.example.app.gasto.dto.GastoUpdateRequestDTO;
 import com.example.app.gasto.dto.GastoResponseDTO;
 import com.example.app.gasto.service.GastoService;
 import jakarta.validation.Valid;
@@ -60,6 +61,26 @@ public class GastoController {
     @GetMapping
     public ResponseEntity<List<GastoResponseDTO>> listar() {
         return ResponseEntity.ok(gastoService.listarPropios());
+    }
+
+    /**
+     * PUT /api/gastos/{id}
+     *
+     * Actualiza un gasto existente del usuario autenticado.
+     * Solo se modifican los campos enviados (los null se ignoran).
+     *
+     * Responses:
+     *   200 OK          -> gasto actualizado correctamente
+     *   400 Bad Request -> validaciones fallidas
+     *   401 Unauthorized-> token ausente o invalido
+     *   403 Forbidden   -> el gasto pertenece a otro usuario
+     *   404 Not Found   -> gasto o categoria inexistente
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<GastoResponseDTO> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody GastoUpdateRequestDTO request) {
+        return ResponseEntity.ok(gastoService.actualizar(id, request));
     }
 
     /**

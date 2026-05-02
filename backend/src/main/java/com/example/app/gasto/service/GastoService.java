@@ -1,6 +1,8 @@
 package com.example.app.gasto.service;
 
 import com.example.app.exception.ResourceNotFoundException;
+import com.example.app.exception.UnauthorizedAccessException;
+import com.example.app.gasto.dto.GastoUpdateRequestDTO;
 import com.example.app.gasto.dto.GastoRequestDTO;
 import com.example.app.gasto.dto.GastoResponseDTO;
 import com.example.app.models.Categoria;
@@ -70,12 +72,52 @@ public class GastoService {
         return toResponseDTO(guardado);
     }
 
+    public GastoResponseDTO actualizar(Long id, GastoUpdateRequestDTO request) {
+        Usuario usuario = getUsuarioAutenticado();
+
+        // 1. Verificar existencia
+        Gasto gasto = gastoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Gasto", id));
+
+        // 2. Verificar ownership — 403 si el gasto pertenece a otro usuario
+        if (!gasto.getUsuario().getId().equals(usuario.getId())) {
+            throw new UnauthorizedAccessException("Gasto", id);
+        }
+
+        // 3. Actualizar solo los campos que vienen con valor (patch parcial)
+        if (request.getMonto() != null) {
+            gasto.setMonto(request.getMonto());
+        }
+        if (request.getDescripcion() != null) {
+            gasto.setDescripcion(request.getDescripcion());
+        }
+        if (request.getFecha() != null) {
+            gasto.setFecha(request.getFecha());
+        }
+        if (request.getNumeroReferencia() != null) {
+            gasto.setNumeroReferencia(request.getNumeroReferencia());
+        }
+        if (request.getCategoriaId() != null) {
+            Categoria categoria = categoriaRepository.findById(request.getCategoriaId())
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            "Categoria", request.getCategoriaId()));
+            gasto.setCategoria(categoria);
+        }
+
+        // 4. JPA detecta cambios automaticamente en contexto transaccional
+        Gasto actualizado = gastoRepository.save(gasto);
+        log.info("Gasto actualizado -> id: {}, usuario: {}", actualizado.getId(), usuario.getEmail());
+
+        return toResponseDTO(actualizado);
+    }
+
+    // -- Consultas --
     // ── Consultas ────────────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public List<GastoResponseDTO> listarPropios() {
         Usuario usuario = getUsuarioAutenticado();
-        return gastoRepository.findByUsuarioId(usuario.getId())
+        return gastoRepository.findByUsuarioIdOrderByFechaDesc(usuario.getId())
                 .stream()
                 .map(this::toResponseDTO)
                 .toList();

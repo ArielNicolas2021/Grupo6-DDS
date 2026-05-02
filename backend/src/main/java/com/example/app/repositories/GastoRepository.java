@@ -15,6 +15,9 @@ public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
     List<Gasto> findByUsuarioId(Long usuarioId);
 
+    // Ordenado por fecha descendente — usado en GET /api/gastos
+    List<Gasto> findByUsuarioIdOrderByFechaDesc(Long usuarioId);
+
     List<Gasto> findByUsuarioIdAndFechaBetween(Long usuarioId, LocalDate desde, LocalDate hasta);
 
     List<Gasto> findByUsuarioIdAndCategoriaId(Long usuarioId, Long categoriaId);
