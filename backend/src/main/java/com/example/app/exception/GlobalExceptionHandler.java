@@ -83,6 +83,24 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 401 Unauthorized — credenciales inválidas en el login.
+     */
+    @ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
+    public ResponseEntity<ApiErrorResponseDTO> handleBadCredentials(
+            RuntimeException ex, HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+            ApiErrorResponseDTO.builder()
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .error("Unauthorized")
+                .mensaje("Credenciales inválidas")
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build()
+        );
+    }
+
+    /**
      * 500 Internal Server Error — cualquier excepción no controlada.
      */
     @ExceptionHandler(Exception.class)

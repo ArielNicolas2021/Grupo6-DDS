@@ -1,62 +1,66 @@
 package com.example.app.config;
 
+import com.example.app.security.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-/**
- * Configuración de Spring Security.
- *
- * Política actual (base para futuro JWT):
- *  - /auth/**       → público (registro, login)
- *  - /h2-console/** → público (solo desarrollo)
- *  - /api/**        → protegido (requiere autenticación)
- *  - Sesiones deshabilitadas (stateless — preparado para JWT)
- */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // Deshabilitar CSRF (API REST stateless no lo necesita)
             .csrf(AbstractHttpConfigurer::disable)
-
-            // Política de sesiones: STATELESS (sin HttpSession)
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-            // Reglas de autorización
             .authorizeHttpRequests(auth -> auth
-                // Endpoints públicos de autenticación
                 .requestMatchers("/auth/**").permitAll()
-                // Consola H2 (solo desarrollo — remover en producción)
                 .requestMatchers("/h2-console/**").permitAll()
-                // Health check
                 .requestMatchers("/api/health").permitAll()
-                // Todo lo demás requiere autenticación
                 .anyRequest().authenticated()
             )
-
-            // Permitir frames de H2 console (solo desarrollo)
+            .authenticationProvider(authenticationProvider())
+            // El filtro JWT se ejecuta ANTES del filtro de usuario/password estándar
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .headers(headers ->
                 headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
     }
 
-    /**
-     * Bean de BCryptPasswordEncoder.
-     * Inyectado en AuthService para hashear contraseñas.
-     * BCrypt aplica salt automático y es resistente a ataques de fuerza bruta.
-     */
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
+        return config.getAuthenticationManager();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
