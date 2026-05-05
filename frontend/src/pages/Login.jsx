@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { saveToken } from "../services/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -45,6 +46,7 @@ const Login = () => {
         setServerError(data.error || "Email o contraseña incorrectos.");
         return;
       }
+      saveToken(data.token); 
       alert("¡Bienvenido!");
     } catch (err) {
       setServerError("No se pudo conectar con el servidor.");
