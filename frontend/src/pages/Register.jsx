@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    nombre: "",
     email: "",
     password: "",
   });
@@ -12,8 +12,8 @@ const Register = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim())
-      newErrors.name = "El nombre es obligatorio.";
+    if (!formData.nombre.trim())
+      newErrors.nombre = "El nombre es obligatorio.";
     if (!formData.email.trim())
       newErrors.email = "El email es obligatorio.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
@@ -40,17 +40,22 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/auth/register", {
+      const response = await fetch("http://localhost:8080/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      if (!response.ok) {
-        setServerError(data.error || "Error al registrarse.");
+      if (data.status == 409) {
+        setServerError(data.mensaje || "Error al registrarse.");
+        return;
+      }
+      if (data.status == 400) {
+        setServerError(`${data.mensaje}: ${data.detalles}` || "Error al registrarse.");
         return;
       }
       alert("¡Cuenta creada exitosamente!");
+      setFormData({ nombre: "", email: "", password: "" });
     } catch (err) {
       setServerError("No se pudo conectar con el servidor.");
     } finally {
@@ -79,14 +84,14 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="nombre"
+              value={formData.nombre}
               onChange={handleChange}
               placeholder="Juan Pérez"
-              className={`w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? "border-red-400" : "border-gray-300"}`}
+              className={`w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.nombre ? "border-red-400" : "border-gray-300"}`}
             />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+            {errors.nombre && (
+              <p className="text-red-500 text-xs mt-1">{errors.nombre}</p>
             )}
           </div>
 

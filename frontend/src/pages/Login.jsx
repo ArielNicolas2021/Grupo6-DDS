@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { saveToken } from "../services/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -36,18 +38,19 @@ const Login = () => {
     }
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       if (!response.ok) {
-        setServerError(data.error || "Email o contraseña incorrectos.");
+        setServerError(data.mensaje || "Email o contraseña incorrectos.");
         return;
       }
       saveToken(data.token); 
       alert("¡Bienvenido!");
+      navigate("/dashboard"); // Redirigir al dashboard después de iniciar sesión
     } catch (err) {
       setServerError("No se pudo conectar con el servidor.");
     } finally {
