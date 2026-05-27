@@ -55,6 +55,7 @@ const Register = () => {
         return;
       }
       alert("¡Cuenta creada exitosamente!");
+window.location.href = "/login";
       setFormData({ nombre: "", email: "", password: "" });
     } catch (err) {
       setServerError("No se pudo conectar con el servidor.");
