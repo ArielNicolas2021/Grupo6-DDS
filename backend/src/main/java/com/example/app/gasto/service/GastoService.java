@@ -19,6 +19,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import com.example.app.gasto.dto.GastoPorCategoriaResponseDTO;
+import com.example.app.gasto.dto.GastoRangoResponseDTO;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+
 
 /**
  * Servicio de negocio para Gastos.
@@ -150,6 +156,94 @@ public class GastoService {
 
         gastoRepository.delete(gasto);
         log.info("Gasto eliminado -> id: {}, usuario: {}", id, usuario.getEmail());
+    }
+
+
+    // Gastos por rango de fechas
+
+    @Transactional(readOnly = true)
+    public GastoRangoResponseDTO buscarPorRango(LocalDate desde, LocalDate hasta) {
+        if (desde == null || hasta == null) {
+            throw new IllegalArgumentException("Los parametros 'desde' y 'hasta' son obligatorios");
+        }
+        if (desde.isAfter(hasta)) {
+            throw new IllegalArgumentException(
+                "La fecha 'desde' (" + desde + ") no puede ser posterior a 'hasta' (" + hasta + ")");
+        }
+
+        Usuario usuario = getUsuarioAutenticado();
+
+        List<Gasto> gastos = gastoRepository
+                .findByUsuarioIdAndFechaBetween(usuario.getId(), desde, hasta);
+
+        gastos.sort((a, b) -> b.getFecha().compareTo(a.getFecha()));
+
+        BigDecimal total = gastos.stream()
+                .map(Gasto::getMonto)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return GastoRangoResponseDTO.builder()
+                .desde(desde)
+                .hasta(hasta)
+                .cantidad(gastos.size())
+                .total(total)
+                .gastos(gastos.stream().map(this::toResponseDTO).toList())
+                .build();
+    }
+
+    public LocalDate[] resolverRango(String tipo) {
+        LocalDate hoy = LocalDate.now();
+        return switch (tipo.toUpperCase()) {
+            case "DIA"    -> new LocalDate[]{ hoy, hoy };
+            case "SEMANA" -> new LocalDate[]{
+                hoy.with(java.time.DayOfWeek.MONDAY),
+                hoy.with(java.time.DayOfWeek.SUNDAY)
+            };
+            case "MES"    -> new LocalDate[]{
+                hoy.with(TemporalAdjusters.firstDayOfMonth()),
+                hoy.with(TemporalAdjusters.lastDayOfMonth())
+            };
+            case "ANIO"   -> new LocalDate[]{
+                hoy.with(TemporalAdjusters.firstDayOfYear()),
+                hoy.with(TemporalAdjusters.lastDayOfYear())
+            };
+            default -> throw new IllegalArgumentException(
+                "Tipo invalido: '" + tipo + "'. Valores validos: DIA, SEMANA, MES, ANIO");
+        };
+    }
+
+    // Gastos por categoria
+
+    @Transactional(readOnly = true)
+    public GastoPorCategoriaResponseDTO buscarPorCategoria(Long categoriaId) {
+        Usuario usuario = getUsuarioAutenticado();
+
+        Categoria categoria = categoriaRepository.findById(categoriaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria", categoriaId));
+
+        boolean esPropiaDelUsuario = categoria.getUsuario() != null
+                && categoria.getUsuario().getId().equals(usuario.getId());
+        boolean esGlobal = categoria.getUsuario() == null;
+
+        if (!esPropiaDelUsuario && !esGlobal) {
+            throw new ResourceNotFoundException("Categoria", categoriaId);
+        }
+
+        List<Gasto> gastos = gastoRepository
+                .findByUsuarioIdAndCategoriaId(usuario.getId(), categoriaId);
+        gastos.sort((a, b) -> b.getFecha().compareTo(a.getFecha()));
+
+        BigDecimal total = gastos.stream()
+                .map(Gasto::getMonto)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return GastoPorCategoriaResponseDTO.builder()
+                .categoriaId(categoriaId)
+                .categoriaNombre(categoria.getNombre())
+                .cantidad(gastos.size())
+                .total(total)
+                .gastos(gastos.stream().map(this::toResponseDTO).toList())
+                .build();
     }
 
     // Helpers ──────────────────────────────────────────────────────────────
