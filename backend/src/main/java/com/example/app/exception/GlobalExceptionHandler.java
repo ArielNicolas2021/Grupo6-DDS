@@ -1,8 +1,8 @@
 package com.example.app.exception;
 
 import com.example.app.auth.dto.ApiErrorResponseDTO;
-import com.example.app.exception.ResourceNotFoundException;
-import com.example.app.exception.UnauthorizedAccessException;
+import com.example.app.categoria.service.CategoriaService.CategoriaConMovimientosException;
+import com.example.app.categoria.service.CategoriaService.CategoriaYaExisteException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +77,42 @@ public class GlobalExceptionHandler {
             ApiErrorResponseDTO.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error("Bad Request")
+                .mensaje(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build()
+        );
+    }
+
+    /**
+     * 409 Conflict - la categoria tiene movimientos asociados y no puede eliminarse.
+     */
+    @ExceptionHandler(CategoriaConMovimientosException.class)
+    public ResponseEntity<ApiErrorResponseDTO> handleCategoriaConMovimientos(
+            CategoriaConMovimientosException ex, HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ApiErrorResponseDTO.builder()
+                .status(HttpStatus.CONFLICT.value())
+                .error("Conflict")
+                .mensaje(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build()
+        );
+    }
+
+    /**
+     * 409 Conflict - categoria duplicada.
+     */
+    @ExceptionHandler(CategoriaYaExisteException.class)
+    public ResponseEntity<ApiErrorResponseDTO> handleCategoriaYaExiste(
+            CategoriaYaExisteException ex, HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ApiErrorResponseDTO.builder()
+                .status(HttpStatus.CONFLICT.value())
+                .error("Conflict")
                 .mensaje(ex.getMessage())
                 .timestamp(LocalDateTime.now())
                 .path(request.getRequestURI())
