@@ -1,8 +1,10 @@
 package com.example.app.exception;
 
 import com.example.app.auth.dto.ApiErrorResponseDTO;
+import com.example.app.exception.ResourceNotFoundException;
 import com.example.app.categoria.service.CategoriaService.CategoriaConMovimientosException;
 import com.example.app.categoria.service.CategoriaService.CategoriaYaExisteException;
+import com.example.app.exception.UnauthorizedAccessException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

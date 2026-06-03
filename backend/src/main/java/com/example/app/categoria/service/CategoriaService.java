@@ -2,6 +2,7 @@ package com.example.app.categoria.service;
 
 import com.example.app.categoria.dto.CategoriaRequestDTO;
 import com.example.app.categoria.dto.CategoriaResponseDTO;
+import com.example.app.exception.EmailAlreadyExistsException;
 import com.example.app.exception.ResourceNotFoundException;
 import com.example.app.exception.UnauthorizedAccessException;
 import com.example.app.models.Categoria;
@@ -101,12 +102,8 @@ public class CategoriaService {
         }
 
         // 4. Verificar si tiene gastos o ingresos asociados
-        long totalGastos = gastoRepository.findAll().stream()
-                .filter(g -> g.getCategoria() != null && id.equals(g.getCategoria().getId()))
-                .count();
-        long totalIngresos = ingresoRepository.findAll().stream()
-                .filter(i -> i.getCategoria() != null && id.equals(i.getCategoria().getId()))
-                .count();
+        long totalGastos   = gastoRepository.countByCategoriaId(id);
+        long totalIngresos = ingresoRepository.countByCategoriaId(id);
 
         if (totalGastos > 0 || totalIngresos > 0) {
             throw new CategoriaConMovimientosException(id, totalGastos, totalIngresos);

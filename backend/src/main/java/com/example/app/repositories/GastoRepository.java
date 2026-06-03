@@ -22,6 +22,17 @@ public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
     List<Gasto> findByUsuarioIdAndCategoriaId(Long usuarioId, Long categoriaId);
 
+    long countByCategoriaId(Long categoriaId);
+
+    long countByUsuarioId(Long usuarioId);
+
+    /**
+     * Suma total de gastos del usuario.
+     * COALESCE garantiza que retorne 0 si no hay registros (nunca null).
+     */
+    @Query("SELECT COALESCE(SUM(g.monto), 0) FROM Gasto g WHERE g.usuario.id = :usuarioId")
+    BigDecimal sumTotalByUsuarioId(@Param("usuarioId") Long usuarioId);
+
     /**
      * Suma total de gastos de un usuario en un rango de fechas.
      */
