@@ -15,9 +15,23 @@ public interface IngresoRepository extends JpaRepository<Ingreso, Long> {
 
     List<Ingreso> findByUsuarioId(Long usuarioId);
 
+    // Ordenado por fecha descendente — usado en GET /api/ingresos
+    List<Ingreso> findByUsuarioIdOrderByFechaDesc(Long usuarioId);
+
     List<Ingreso> findByUsuarioIdAndFechaBetween(Long usuarioId, LocalDate desde, LocalDate hasta);
 
     List<Ingreso> findByUsuarioIdAndCategoriaId(Long usuarioId, Long categoriaId);
+
+    long countByCategoriaId(Long categoriaId);
+
+    long countByUsuarioId(Long usuarioId);
+
+    /**
+     * Suma total de ingresos del usuario.
+     * COALESCE garantiza que retorne 0 si no hay registros (nunca null).
+     */
+    @Query("SELECT COALESCE(SUM(i.monto), 0) FROM Ingreso i WHERE i.usuario.id = :usuarioId")
+    BigDecimal sumTotalByUsuarioId(@Param("usuarioId") Long usuarioId);
 
     /**
      * Suma total de ingresos de un usuario en un rango de fechas.
