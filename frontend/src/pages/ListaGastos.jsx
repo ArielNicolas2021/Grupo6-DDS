@@ -37,11 +37,28 @@ const ListaGastos = () => {
     setEditando(gasto.id);
     setFormEdit({ ...gasto });
   };
-
-  const handleCancelar = () => {
+  const handleEliminar = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`http://localhost:8080/api/gastos/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      alert("Error al eliminar el gasto.");
+      return;
+    }
+    fetchGastos();
+  } catch (err) {
+    alert("No se pudo conectar con el servidor.");
+  }
+};
+  function handleCancelar() {
     setEditando(null);
     setFormEdit({});
-  };
+  }
 
   const handleGuardar = async (id) => {
     try {
@@ -157,6 +174,16 @@ const ListaGastos = () => {
                       className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-lg"
                     >
                       Editar
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (window.confirm("¿Estás seguro que querés eliminar este gasto?")) {
+                          handleEliminar(gasto.id);
+                        }
+                      }}
+                      className="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-lg"
+                    >
+                      🗑️ Eliminar
                     </button>
                   </div>
                 </div>
