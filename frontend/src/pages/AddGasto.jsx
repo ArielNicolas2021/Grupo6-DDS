@@ -3,7 +3,7 @@ import { useState } from "react";
 const AddGasto = () => {
   const [formData, setFormData] = useState({
     monto: "",
-    categoria: "",
+    categoriaId: "",
     fecha: "",
     descripcion: "",
   });
@@ -18,8 +18,8 @@ const AddGasto = () => {
       newErrors.monto = "El monto es obligatorio.";
     else if (isNaN(formData.monto) || Number(formData.monto) <= 0)
       newErrors.monto = "El monto debe ser un número mayor a 0.";
-    if (!formData.categoria.trim())
-      newErrors.categoria = "La categoría es obligatoria.";
+    if (!formData.categoriaId)
+      newErrors.categoriaId = "La categoría es obligatoria.";
     if (!formData.fecha)
       newErrors.fecha = "La fecha es obligatoria.";
     if (!formData.descripcion.trim())
@@ -27,11 +27,11 @@ const AddGasto = () => {
     return newErrors;
   };
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
     setServerError("");
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +42,13 @@ const AddGasto = () => {
     }
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    const fechaFormateada = formData.fecha;
+        console.log("Datos enviados:", {
+  ...formData,
+  fecha: fechaFormateada,
+  monto: Number(formData.monto),
+    });
       const response = await fetch("http://localhost:8080/api/gastos", {
         method: "POST",
         headers: {
@@ -50,8 +56,10 @@ const AddGasto = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          ...formData,
           monto: Number(formData.monto),
+          descripcion: formData.descripcion,
+          fecha: fechaFormateada,
+          categoriaId: Number(formData.categoriaId),
         }),
       });
       if (!response.ok) {
@@ -60,7 +68,7 @@ const AddGasto = () => {
         return;
       }
       setSuccess(true);
-      setFormData({ monto: "", categoria: "", fecha: "", descripcion: "" });
+      setFormData({ monto: "", categoriaId: "", fecha: "", descripcion: "" });
     } catch (err) {
       setServerError("No se pudo conectar con el servidor.");
     } finally {
@@ -113,21 +121,21 @@ const AddGasto = () => {
               Categoría
             </label>
             <select
-              name="categoria"
-              value={formData.categoria}
+              name="categoriaId"
+              value={formData.categoriaId}
               onChange={handleChange}
-              className={`w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.categoria ? "border-red-400" : "border-gray-300"}`}
+              className={`w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.categoriaId ? "border-red-400" : "border-gray-300"}`}
             >
               <option value="">Seleccioná una categoría</option>
-              <option value="comida">Comida</option>
-              <option value="transporte">Transporte</option>
-              <option value="salud">Salud</option>
-              <option value="ocio">Ocio</option>
-              <option value="educacion">Educación</option>
-              <option value="otro">Otro</option>
+              <option value="1">Comida</option>
+              <option value="2">Transporte</option>
+              <option value="3">Salud</option>
+              <option value="4">Ocio</option>
+              <option value="5">Educación</option>
+              <option value="6">Otro</option>
             </select>
-            {errors.categoria && (
-              <p className="text-red-500 text-xs mt-1">{errors.categoria}</p>
+            {errors.categoriaId && (
+              <p className="text-red-500 text-xs mt-1">{errors.categoriaId}</p>
             )}
           </div>
 
