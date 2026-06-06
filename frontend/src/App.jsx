@@ -8,9 +8,11 @@ import AddGasto from "./pages/AddGasto";
 import ListaGastos from "./pages/ListaGastos";
 import AddIngreso from "./pages/AddIngreso";
 import ListaIngresos from "./pages/ListaIngresos";
+import FiltroGastos from "./pages/FiltroGastos";
 import NotFound from "./pages/NotFound";
 import Categorias from "./pages/Categorias";
 import AddCategoria from "./pages/AddCategoria";
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/agregar-ingreso" element={<AddIngreso />} />
           <Route path="/categorias" element={<Categorias />} />
           <Route path="/agregar-categoria" element={<AddCategoria />} />
+          <Route path="/filtro-gastos" element={<FiltroGastos />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
