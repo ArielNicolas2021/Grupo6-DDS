@@ -12,6 +12,7 @@ import FiltroGastos from "./pages/FiltroGastos";
 import NotFound from "./pages/NotFound";
 import Categorias from "./pages/Categorias";
 import AddCategoria from "./pages/AddCategoria";
+import FiltroCategorias from "./pages/FiltroCategorias";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/categorias" element={<Categorias />} />
           <Route path="/agregar-categoria" element={<AddCategoria />} />
           <Route path="/filtro-gastos" element={<FiltroGastos />} />
+          <Route path="/filtro-categorias" element={<FiltroCategorias />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
