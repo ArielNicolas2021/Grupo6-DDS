@@ -10,6 +10,7 @@ import AddIngreso from "./pages/AddIngreso";
 import ListaIngresos from "./pages/ListaIngresos";
 import NotFound from "./pages/NotFound";
 import Categorias from "./pages/Categorias";
+import AddCategoria from "./pages/AddCategoria";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/ingresos" element={<ListaIngresos />} />
           <Route path="/agregar-ingreso" element={<AddIngreso />} />
           <Route path="/categorias" element={<Categorias />} />
+          <Route path="/agregar-categoria" element={<AddCategoria />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
