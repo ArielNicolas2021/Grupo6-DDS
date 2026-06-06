@@ -127,12 +127,13 @@ const AddGasto = () => {
               className={`w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.categoriaId ? "border-red-400" : "border-gray-300"}`}
             >
               <option value="">Seleccioná una categoría</option>
-              <option value="1">Comida</option>
+              <option value="1">Alimentación</option>
               <option value="2">Transporte</option>
-              <option value="3">Salud</option>
-              <option value="4">Ocio</option>
-              <option value="5">Educación</option>
-              <option value="6">Otro</option>
+              <option value="3">vivienda</option>
+              <option value="4">Salud</option>
+              <option value="5">Entretenimiento</option>
+              <option value="6">Educación</option>
+              <option value="10">Otro</option>
             </select>
             {errors.categoriaId && (
               <p className="text-red-500 text-xs mt-1">{errors.categoriaId}</p>

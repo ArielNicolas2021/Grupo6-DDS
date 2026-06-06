@@ -9,6 +9,7 @@ import ListaGastos from "./pages/ListaGastos";
 import AddIngreso from "./pages/AddIngreso";
 import ListaIngresos from "./pages/ListaIngresos";
 import NotFound from "./pages/NotFound";
+import Categorias from "./pages/Categorias";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/gastos" element={<ListaGastos />} />
           <Route path="/ingresos" element={<ListaIngresos />} />
           <Route path="/agregar-ingreso" element={<AddIngreso />} />
+          <Route path="/categorias" element={<Categorias />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
