@@ -25,11 +25,12 @@ const ListaGastos = () => {
       const ordenados = data.sort(
         (a, b) => new Date(b.fecha) - new Date(a.fecha)
       );
+      setLoading(false);
       setGastos(ordenados);
     } catch (err) {
       setError("No se pudo conectar con el servidor.");
     } finally {
-      setLoading(false);
+      
     }
   };
 

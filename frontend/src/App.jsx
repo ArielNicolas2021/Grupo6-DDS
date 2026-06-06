@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddGasto from "./pages/AddGasto";
 import ListaGastos from "./pages/ListaGastos";
+import AddIngreso from "./pages/AddIngreso";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/agregar-gasto" element={<AddGasto />} />
           <Route path="/gastos" element={<ListaGastos />} />
+          <Route path="/agregar-ingreso" element={<AddIngreso />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
