@@ -27,6 +27,7 @@ export default function Login() {
       const data = await response.json();
        console.log("Respuesta del login:", data); // ← agregá esta línea
        localStorage.setItem("token", data.token);
+       localStorage.setItem("nombreUsuario", data.email.split("@")[0]);
       navigate("/dashboard");
     } catch {
       setError("No se pudo conectar con el servidor.");

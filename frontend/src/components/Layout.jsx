@@ -1,15 +1,17 @@
-
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import {
   LayoutDashboard, CreditCard, TrendingUp, Tag,
-  SlidersHorizontal, List, Bell, ChevronRight, Star
+  SlidersHorizontal, List, Bell, ChevronRight, Star, Plus
 } from "lucide-react";
 
 const sideOps = [
   { path: "/agregar-gasto",    icon: CreditCard,        label: "Gastos",     color: "#ef4444" },
   { path: "/agregar-ingreso",  icon: TrendingUp,        label: "Ingresos",   color: "#22c55e" },
   { path: "/categorias",       icon: Tag,               label: "Categorías", color: "#f59e0b" },
-  { path: "/filtro-gastos",    icon: SlidersHorizontal, label: "Filtros",    color: "#8b5cf6" },
+ { path: "/filtro-gastos",      icon: SlidersHorizontal, label: "Filtro por Fecha",      color: "#8b5cf6" },
+ { path: "/filtro-categorias",  icon: SlidersHorizontal, label: "Filtro por Categoría",  color: "#8b5cf6" },
+ { path: "/agregar-categoria", icon: Plus, label: "Nueva Categoría", color: "#f59e0b" },
+
 ];
 
 const sideHist = [
