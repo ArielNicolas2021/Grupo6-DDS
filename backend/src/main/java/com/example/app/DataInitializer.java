@@ -50,13 +50,13 @@ public class DataInitializer implements CommandLineRunner {
             log.info("  ✅ Categorías ya existentes: {}", categoriaRepository.count());
         }
 
-        log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        log.info("  🟢 Tablas verificadas:");
-        log.info("     • usuarios");
-        log.info("     • categorias");
-        log.info("     • gastos");
-        log.info("     • ingresos");
-        log.info("  🚀 Aplicación lista en http://localhost:8080");
-        log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        System.out.println("=========================================");
+        System.out.println("Tablas verificadas:");
+        System.out.println("  - usuarios");
+        System.out.println("  - categorias");
+        System.out.println("  - gastos");
+        System.out.println("  - ingresos");
+        System.out.println("Aplicación lista en http://localhost:8080");
+        System.out.println("=========================================");
     }
 }
