@@ -1,33 +1,35 @@
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
-import {
-  LayoutDashboard, CreditCard, TrendingUp, Tag,
-  SlidersHorizontal, List, Bell, ChevronRight, Star, Plus
-} from "lucide-react";
+import { LayoutDashboard, CreditCard, TrendingUp, Tag, SlidersHorizontal, List, Bell, ChevronRight, Star, Plus } from "lucide-react";
 
 const sideOps = [
-  { path: "/agregar-gasto",    icon: CreditCard,        label: "Gastos",     color: "#ef4444" },
-  { path: "/agregar-ingreso",  icon: TrendingUp,        label: "Ingresos",   color: "#22c55e" },
-  { path: "/categorias",       icon: Tag,               label: "Categorías", color: "#f59e0b" },
- { path: "/filtro-gastos",      icon: SlidersHorizontal, label: "Filtro por Fecha",      color: "#8b5cf6" },
- { path: "/filtro-categorias",  icon: SlidersHorizontal, label: "Filtro por Categoría",  color: "#8b5cf6" },
- { path: "/agregar-categoria", icon: Plus, label: "Nueva Categoría", color: "#f59e0b" },
+  { path: "/agregar-gasto", icon: CreditCard, label: "Gastos", color: "#ef4444" },
+  { path: "/agregar-ingreso", icon: TrendingUp, label: "Ingresos", color: "#22c55e" },
+  { path: "/categorias", icon: Tag, label: "Categorías", color: "#f59e0b" },
+  { path: "/filtro-gastos", icon: SlidersHorizontal, label: "Filtro por Fecha", color: "#8b5cf6" },
+  { path: "/filtro-categorias", icon: SlidersHorizontal, label: "Filtro por Categoría", color: "#8b5cf6" },
+  { path: "/agregar-categoria", icon: Plus, label: "Nueva Categoría", color: "#f59e0b" },
 
 ];
 
 const sideHist = [
-  { path: "/gastos",   icon: List, label: "Lista de Gastos",   color: "#ef4444" },
+  { path: "/gastos", icon: List, label: "Lista de Gastos", color: "#ef4444" },
   { path: "/ingresos", icon: List, label: "Lista de Ingresos", color: "#22c55e" },
 ];
 
 function SidebarButton({ item, active, onClick }) {
+  const navigate = useNavigate();
   return (
     <button
-      onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-        active
-          ? "bg-blue-600 text-white shadow-lg"
-          : "text-gray-400 hover:bg-white/10 hover:text-white"
-      }`}
+      onClick={() => {
+        navigate(item.path);
+        setSidebarOpen(false);
+      }}
+      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${active
+        ? "bg-blue-600 text-white shadow-lg"
+        : "text-gray-400 hover:bg-white/10 hover:text-white"
+        }`}
     >
       <div
         className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -44,11 +46,13 @@ function SidebarButton({ item, active, onClick }) {
 export default function Layout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden font-sans">
+    <div className="flex h-screen font-sans relative">
       {/* ── SIDEBAR ── */}
-      <div className="w-56 flex-shrink-0 flex flex-col text-white overflow-y-auto"
+      <div
+        className={`fixed md:relative z-50 md:z-auto top-0 left-0 h-full w-64 flex flex-col text-white overflow-y-auto transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
         style={{ background: "#1a2035" }}>
 
         {/* Logo */}
@@ -61,15 +65,23 @@ export default function Layout() {
           </span>
         </div>
 
+        <div className="md:hidden absolute top-4 right-4">
+          <button onClick={() => setSidebarOpen(false)}>
+            <X size={22} />
+          </button>
+        </div>
+
         <div className="flex-1 p-3 space-y-1">
           {/* Dashboard */}
           <button
-            onClick={() => navigate("/dashboard")}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-              pathname === "/dashboard"
-                ? "bg-blue-600 text-white shadow-lg"
-                : "text-gray-400 hover:bg-white/10 hover:text-white"
-            }`}
+            onClick={() => {
+              navigate("/dashboard");
+              setSidebarOpen(false);
+            }}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${pathname === "/dashboard"
+              ? "bg-blue-600 text-white shadow-lg"
+              : "text-gray-400 hover:bg-white/10 hover:text-white"
+              }`}
           >
             <LayoutDashboard size={17} />
             Dashboard
@@ -117,11 +129,23 @@ export default function Layout() {
           </div>
         </div>
       </div>
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* ── CONTENIDO PRINCIPAL ── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden md:ml-0">
         {/* Topbar */}
-        <div className="flex items-center justify-end px-6 py-3 bg-white border-b border-gray-100 flex-shrink-0">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+        >
+          <Menu size={22} />
+        </button>
+        <div className="flex items-center justify-between px-4 md:px-6 py-3 bg-white border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
             <button className="relative p-2 hover:bg-gray-100 rounded-xl transition-colors">
               <Bell size={18} className="text-gray-600" />

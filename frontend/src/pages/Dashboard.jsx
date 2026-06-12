@@ -124,22 +124,22 @@ export default function Dashboard() {
   const saludo = getSaludo();
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-3 sm:p-6 space-y-6">
 
       {/* Banner */}
-      <div className="rounded-2xl p-6 text-white relative overflow-hidden"
+      <div className="rounded-2xl p-4 sm:p-6 text-white relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #3b82f6, #2563eb, #4f46e5)" }}>
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">💳</div>
-        <div className="absolute right-24 top-3 text-3xl opacity-50 select-none">💰</div>
-        <div className="absolute right-14 bottom-2 text-2xl opacity-40 select-none">🌿</div>
-        <h2 className="text-2xl font-bold mb-1">{saludo.emoji} {saludo.texto}</h2>
+        <div className="hidden sm:block absolute right-6 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">💳</div>
+        <div className="hidden sm:block absolute right-24 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">💰</div>
+        <div className="hidden sm:block absolute right-14 top-1/2 -translate-y-1/2 text-6xl opacity-70 select-none">🌿</div>
+        <h2 className="text-xl sm:text-2xl font-bold mb-1">{saludo.emoji} {saludo.texto}</h2>
         <p className="text-blue-100 text-sm max-w-xs leading-relaxed">
           Controlá tus finanzas de manera simple y mantené un seguimiento de tus gastos e ingresos.
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {[
           { label: "Gastos del mes",   value: gastosMes,  color: "#ef4444", bg: "#fee2e2", icon: "💸", change: "Este mes", up: false },
           { label: "Ingresos del mes", value: ingresosMes,color: "#22c55e", bg: "#dcfce7", icon: "💵", change: "Este mes", up: true  },
@@ -158,7 +158,7 @@ export default function Dashboard() {
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg"
                     style={{ backgroundColor: s.bg }}>{s.icon}</div>
                 </div>
-                <div className="text-2xl font-bold mb-1.5" style={{ color: s.color }}>
+                <div className="text-xl sm:text-2xl font-bold mb-1.5" style={{ color: s.color }}>
                   {s.value < 0 ? "-" : ""}${fmt(s.value)}
                 </div>
                 <div className={`flex items-center gap-1 text-xs ${s.up ? "text-green-600" : "text-red-500"}`}>
@@ -174,13 +174,13 @@ export default function Dashboard() {
       {/* Accesos rápidos */}
       <div>
         <h3 className="text-base font-bold text-gray-800 mb-3">Accesos rápidos</h3>
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {quickActions.map(a => (
             <div key={a.path} onClick={() => navigate(a.path)}
               className="bg-white rounded-2xl p-4 text-center cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all border border-gray-100">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl mx-auto mb-2"
                 style={{ backgroundColor: a.bg }}>{a.icon}</div>
-              <div className="text-xs font-bold text-gray-700 leading-tight mb-1">{a.label}</div>
+              <div className="text-xs font-bold text-gray-700 leading-tight mb-1 break-words">{a.label}</div>
               <div className="text-xs text-gray-400 leading-tight">{a.sub}</div>
             </div>
           ))}
@@ -188,7 +188,7 @@ export default function Dashboard() {
       </div>
 
       {/* Gráfico + Movimientos */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-bold text-gray-800">Gastos por categoría</h3>
@@ -207,7 +207,7 @@ export default function Dashboard() {
               <p className="text-xs">Sin gastos este mes</p>
             </div>
           ) : (
-            <div className="flex gap-3 items-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
               <DonutChart data={categoryData} />
               <div className="flex-1 space-y-2">
                 {categoryData.map(d => (
