@@ -17,6 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -39,12 +45,45 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .authenticationProvider(authenticationProvider())
-            // El filtro JWT se ejecuta ANTES del filtro de usuario/password estándar
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .headers(headers ->
                 headers.frameOptions(frame -> frame.sameOrigin()));
 
         return http.build();
+    }
+
+    /**
+     * Configuración CORS global.
+     *
+     * allowedOriginPatterns("*") permite cualquier origen.
+     * Para producción, reemplazar con la URL exacta del frontend:
+     *   .allowedOriginPatterns("https://tu-frontend.com")
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+
+        // Orígenes permitidos — "*" para desarrollo, URL específica en producción
+        config.setAllowedOriginPatterns(List.of("*"));
+
+        // Métodos HTTP permitidos
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+
+        // Headers que el cliente puede enviar (incluye Authorization para JWT)
+        config.setAllowedHeaders(List.of("*"));
+
+        // Headers que el cliente puede leer en la respuesta
+        config.setExposedHeaders(List.of("Authorization"));
+
+        // Permite enviar cookies/credenciales (necesario para algunos clientes)
+        config.setAllowCredentials(true);
+
+        // Tiempo en segundos que el navegador cachea la respuesta del preflight OPTIONS
+        config.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 
     @Bean
