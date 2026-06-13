@@ -55,12 +55,12 @@ const ListaGastos = () => {
   };
 
   return (
-    <div className="p-6" style={{ background: "#f0f4ff", minHeight: "100%" }}>
+    <div className="p-3 sm:p-6" style={{ background: "#f0f4ff", minHeight: "100%" }}>
 
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Historial de Gastos</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Historial de Gastos</h1>
           <p className="text-sm text-gray-500 mt-1">Todos tus gastos registrados</p>
         </div>
         <div className="bg-red-100 text-red-600 text-xs font-bold px-3 py-1.5 rounded-xl">
@@ -93,7 +93,7 @@ const ListaGastos = () => {
             <div key={gasto.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
               {editando === gasto.id ? (
                 <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input type="number" value={formEdit.monto}
                       onChange={e => setFormEdit({ ...formEdit, monto: e.target.value })}
                       placeholder="Monto"
@@ -106,37 +106,37 @@ const ListaGastos = () => {
                     onChange={e => setFormEdit({ ...formEdit, descripcion: e.target.value })}
                     placeholder="Descripción"
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <button onClick={() => handleGuardar(gasto.id)}
-                      className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition-all">
+                      className="w-full sm:w-auto flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition-all">
                       <Check size={15}/> Guardar
                     </button>
                     <button onClick={handleCancelar}
-                      className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-xl transition-all">
+                      className="w-full sm:w-auto flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-xl transition-all">
                       <X size={15}/> Cancelar
                     </button>
                   </div>
                 </div>
               ) : (
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                  <div className="flex items-start sm:items-center gap-4">
                     <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-lg">
                       💸
                     </div>
                     <div>
                       <p className="font-semibold text-gray-800 capitalize">{gasto.categoria}</p>
-                      <p className="text-sm text-gray-500">{gasto.descripcion}</p>
+                      <p className="text-sm text-gray-500 break-words">{gasto.descripcion}</p>
                       <p className="text-xs text-gray-400 mt-0.5">{gasto.fecha}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <p className="text-lg font-bold text-red-500">-${fmt(gasto.monto)}</p>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                    <p className="text-base sm:text-lg font-bold text-red-500">-${fmt(gasto.monto)}</p>
                     <button onClick={() => handleEditar(gasto)}
-                      className="flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-2 rounded-xl transition-all">
+                      className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-2 rounded-xl transition-all">
                       <Pencil size={13}/> Editar
                     </button>
                     <button onClick={() => handleEliminar(gasto.id)}
-                      className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-500 text-xs font-semibold px-3 py-2 rounded-xl transition-all">
+                      className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-500 text-xs font-semibold px-3 py-2 rounded-xl transition-all">
                       <Trash2 size={13}/> Eliminar
                     </button>
                   </div>

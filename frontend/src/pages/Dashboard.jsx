@@ -209,7 +209,7 @@ export default function Dashboard() {
           ) : (
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <DonutChart data={categoryData} />
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 space-y-2 w-full sm:w-auto">
                 {categoryData.map(d => (
                   <div key={d.name} className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-1.5">
