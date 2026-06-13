@@ -43,10 +43,16 @@ function SidebarButton({ item, active, onClick }) {
   );
 }
 
+function getSaludo() {
+  const nombre = localStorage.getItem("nombreUsuario") || "usuario";
+  return "Hola, " + nombre;
+}
+
 export default function Layout() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const saludo = getSaludo();
 
   return (
     <div className="flex h-screen font-sans relative">
@@ -155,7 +161,7 @@ export default function Layout() {
               <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-xs text-white font-bold">
                 G
               </div>
-              <span className="text-sm font-medium text-gray-700">Hola, Gabriel</span>
+              <span className="text-sm font-medium text-gray-700">{saludo.replace(/\b\w/g, (letra) => letra.toUpperCase())}</span>
               <ChevronRight size={13} className="text-gray-400" />
             </div>
           </div>
