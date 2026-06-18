@@ -65,7 +65,7 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         // Gastos del mes
-        const gRes = await fetch("http://localhost:8080/api/gastos/por-fecha?tipo=MES", { headers });
+        const gRes = await fetch("http://3.131.13.187:8080/api/gastos/por-fecha?tipo=MES", { headers });
         if (gRes.ok) {
           const gData = await gRes.json();
           setGastosMes(gData.total || 0);
@@ -98,7 +98,7 @@ export default function Dashboard() {
         }
 
         // Ingresos del mes
-        const iRes = await fetch("http://localhost:8080/api/ingresos", { headers });
+        const iRes = await fetch("http://3.131.13.187:8080/api/ingresos", { headers });
         if (iRes.ok) {
           const iData = await iRes.json();
           const hoy = new Date();

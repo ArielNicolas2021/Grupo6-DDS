@@ -15,7 +15,7 @@ const ListaGastos = () => {
   const fetchGastos = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/gastos", {
+      const response = await fetch("http://3.131.13.187:8080/api/gastos", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) { setError("No se pudieron cargar los gastos."); return; }

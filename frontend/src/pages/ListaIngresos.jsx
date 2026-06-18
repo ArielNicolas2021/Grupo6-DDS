@@ -11,7 +11,7 @@ const ListaIngresos = () => {
     const fetchIngresos = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:8080/api/ingresos", {
+        const response = await fetch("http://3.131.13.187:8080/api/ingresos", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) { setError("No se pudieron cargar los ingresos."); return; }
