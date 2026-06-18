@@ -15,7 +15,7 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("http://3.131.13.187:8080/auth/login", {
+      const response = await fetch("https://gestiongastos.duckdns.org/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -25,9 +25,9 @@ export default function Login() {
         return;
       }
       const data = await response.json();
-       console.log("Respuesta del login:", data); // ← agregá esta línea
-       localStorage.setItem("token", data.token);
-       localStorage.setItem("nombreUsuario", data.email.split("@")[0]);
+      console.log("Respuesta del login:", data); // ← agregá esta línea
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("nombreUsuario", data.email.split("@")[0]);
       navigate("/dashboard");
     } catch {
       setError("No se pudo conectar con el servidor.");
@@ -111,8 +111,8 @@ export default function Login() {
 
         <div className="bg-white/70 backdrop-blur rounded-2xl p-4 flex justify-around">
           {[
-            { icon: "🛡️", label: "Seguro",      sub: "Tu información está protegida" },
-            { icon: "📊", label: "Simple",      sub: "Gestioná tus gastos fácilmente" },
+            { icon: "🛡️", label: "Seguro", sub: "Tu información está protegida" },
+            { icon: "📊", label: "Simple", sub: "Gestioná tus gastos fácilmente" },
             { icon: "🧠", label: "Inteligente", sub: "Tomá mejores decisiones" },
           ].map(f => (
             <div key={f.label} className="text-center px-1">

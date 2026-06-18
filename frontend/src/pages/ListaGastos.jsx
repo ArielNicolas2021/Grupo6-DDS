@@ -15,7 +15,7 @@ const ListaGastos = () => {
   const fetchGastos = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://3.131.13.187:8080/api/gastos", {
+      const response = await fetch("https://gestiongastos.duckdns.org/api/gastos", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) { setError("No se pudieron cargar los gastos."); return; }
@@ -32,7 +32,7 @@ const ListaGastos = () => {
     if (!window.confirm("¿Eliminar este gasto?")) return;
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:8080/api/gastos/${id}`, {
+      await fetch(`https://gestiongastos.duckdns.org/api/gastos/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -43,7 +43,7 @@ const ListaGastos = () => {
   const handleGuardar = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/gastos/${id}`, {
+      const response = await fetch(`https://gestiongastos.duckdns.org/api/gastos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...formEdit, monto: Number(formEdit.monto) }),

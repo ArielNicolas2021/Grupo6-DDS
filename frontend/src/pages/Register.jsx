@@ -22,7 +22,7 @@ export default function Register() {
     }
     setLoading(true); setError("");
     try {
-      const response = await fetch("http://3.131.13.187:8080/auth/register", {
+      const response = await fetch("https://gestiongastos.duckdns.org/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

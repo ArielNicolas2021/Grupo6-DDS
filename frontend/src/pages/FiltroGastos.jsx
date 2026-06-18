@@ -17,7 +17,7 @@ const FiltroGastos = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://3.131.13.187:8080/api/gastos/por-fecha?desde=${fechaDesde}&hasta=${fechaHasta}`,
+        `https://gestiongastos.duckdns.org/api/gastos/por-fecha?desde=${fechaDesde}&hasta=${fechaHasta}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) { setError("Error al filtrar los gastos."); return; }

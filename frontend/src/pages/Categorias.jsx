@@ -9,7 +9,7 @@ const Categorias = () => {
     const fetchCategorias = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://3.131.13.187:8080/api/categorias", {
+        const response = await fetch("https://gestiongastos.duckdns.org/api/categorias", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) { setError("No se pudieron cargar las categorías."); return; }

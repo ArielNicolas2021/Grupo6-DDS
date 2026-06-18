@@ -31,7 +31,7 @@ const AddIngreso = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://3.131.13.187:8080/api/ingresos", {
+      const response = await fetch("https://gestiongastos.duckdns.org/api/ingresos", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
