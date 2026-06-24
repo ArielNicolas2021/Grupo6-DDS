@@ -1,35 +1,35 @@
-# Sistema de Gestión de Gastos para Negocios
+# Sistema de Gestión de Gastos Personales
 
 ## 📋 Descripción del Proyecto
 
-Sistema web diseñado para ayudar a pequeños y medianos negocios a llevar un control eficiente de sus ingresos, gastos y movimientos financieros, permitiendo obtener una visión clara del estado económico del negocio y facilitar la toma de decisiones.
+Sistema web diseñado para ayudar a las personas a llevar un control eficiente de sus ingresos, gastos y movimientos financieros, permitiendo obtener una visión clara de su situación económica y mejorar la administración de sus finanzas personales.
 
-La aplicación proporciona una solución simple, intuitiva y accesible para registrar operaciones diarias, administrar categorías, controlar proveedores y generar reportes financieros.
+La aplicación ofrece una solución simple, intuitiva y accesible para registrar movimientos diarios, organizar gastos mediante categorías y visualizar información relevante a través de reportes y estadísticas.
 
 ---
 
 ## 🎯 Problema Detectado
 
-Muchos pequeños comercios y emprendimientos llevan el control de sus finanzas de manera manual o mediante planillas, lo que genera:
+Muchas personas administran sus finanzas de forma manual o mediante notas y planillas, lo que puede generar:
 
 * Falta de organización.
 * Errores en los registros.
 * Pérdida de información.
-* Dificultad para analizar ingresos y gastos.
-* Escasa visibilidad sobre la rentabilidad del negocio.
+* Dificultad para controlar los gastos mensuales.
+* Escasa visibilidad sobre los hábitos financieros.
 
 ---
 
 ## 💡 Solución Propuesta
 
-Se desarrolló una plataforma web que permite centralizar la información financiera del negocio en un único sistema, brindando herramientas para:
+Se desarrolló una plataforma web que permite centralizar toda la información financiera personal en un único sistema, brindando herramientas para:
 
 * Registrar ingresos y gastos.
 * Clasificar movimientos mediante categorías.
-* Administrar proveedores.
-* Gestionar métodos de pago.
+* Administrar métodos de pago.
 * Obtener reportes y balances.
-* Visualizar información relevante desde un dashboard.
+* Visualizar estadísticas desde un dashboard.
+* Analizar hábitos de consumo para mejorar la gestión financiera.
 
 ---
 
@@ -41,31 +41,31 @@ Se desarrolló una plataforma web que permite centralizar la información financ
 * Inicio de sesión seguro.
 * Gestión de perfiles.
 
-### Gestión del Negocio
+### Gestión Financiera Personal
 
-* Creación y administración del negocio.
-* Configuración general.
+* Administración de ingresos y gastos.
+* Organización de información financiera.
 
 ### Gestión de Movimientos
 
 * Registro de ingresos.
 * Registro de gastos.
 * Edición y eliminación de movimientos.
-* Historial de operaciones.
+* Historial completo de operaciones.
 
 ### Categorías
 
 * Creación de categorías personalizadas.
-* Clasificación de ingresos y gastos.
+* Clasificación de ingresos y gastos para facilitar el análisis.
 
 ### Reportes y Estadísticas
 
 * Balance general.
 * Ingresos totales.
 * Gastos totales.
-* Movimientos por categoría.
+* Distribución de gastos por categoría.
 * Filtrado por fechas.
-* Dashboard con información relevante.
+* Dashboard con información relevante y estadísticas.
 
 ---
 
@@ -194,11 +194,11 @@ La aplicación implementa:
 ## 📈 Beneficios
 
 * Mayor organización financiera.
+* Mejor control de los gastos diarios.
 * Acceso rápido a la información.
-* Reducción de errores.
-* Mejor control de ingresos y gastos.
-* Obtención de reportes en tiempo real.
-* Toma de decisiones basada en datos.
+* Reducción de errores en los registros.
+* Reportes y estadísticas en tiempo real.
+* Comprensión de los hábitos de consumo.
 
 ---
 
@@ -221,12 +221,12 @@ El sistema fue diseñado para permitir futuras mejoras, tales como:
 
 * Exportación a PDF y Excel.
 * Gráficos y estadísticas avanzadas.
-* Gestión de múltiples sucursales.
-* Control de inventario.
-* Notificaciones y recordatorios.
+* Presupuestos mensuales y objetivos de ahorro.
+* Recordatorios de pagos y vencimientos.
+* Notificaciones personalizadas.
 * Aplicación móvil.
-* Integración con servicios de facturación.
-* Inteligencia de negocios y análisis predictivo.
+* Integración con billeteras virtuales y bancos.
+* Análisis predictivo de gastos.
 
 ---
 
@@ -234,4 +234,4 @@ El sistema fue diseñado para permitir futuras mejoras, tales como:
 
 Proyecto desarrollado con fines académicos y de aprendizaje.
 
-© 2026 - Sistema de Gestión de Gastos para Negocios
+© 2026 - Sistema de Gestión de Gastos Personales. Todos los derechos reservados.
