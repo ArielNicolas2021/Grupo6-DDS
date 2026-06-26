@@ -278,67 +278,66 @@ export default function Layout() {
       {/* ── CONTENIDO PRINCIPAL ── */}
       <div className="flex-1 flex flex-col overflow-hidden md:ml-0">
         {/* Topbar */}
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
-        >
-          <Menu size={22} />
-        </button>
-        <div className="flex items-center justify-between px-4 md:px-6 py-3 bg-white border-b border-gray-100 flex-shrink-0">
-          <div className="flex items-center gap-3 ml-auto">
+        <div className="flex justify-between items-center sm:block">
+          <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 hover:bg-gray-100 rounded-lg">
+            <Menu size={22} />
+          </button>
+          <div className="flex items-center justify-between px-4 md:px-6 py-3 bg-white border-b border-gray-100 flex-shrink-0">
+            <div className="flex items-center gap-3 ml-auto">
 
-            {/* Notificaciones */}
-            <div className="relative">
-              <button onClick={() => setShowNotifs(p => !p)}
-                className="relative p-2 hover:bg-gray-100 rounded-xl transition-colors">
-                <Bell size={18} className="text-gray-600" />
-                {notificaciones.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
-                )}
-              </button>
+              {/* Notificaciones */}
+              <div className="">
+                <button onClick={() => setShowNotifs(p => !p)}
+                  className=" p-2 hover:bg-gray-100 rounded-xl transition-colors">
+                  <Bell size={18} className="text-gray-600" />
+                  {notificaciones.length > 0 && (
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                  )}
+                </button>
 
-              {showNotifs && (
-                <>
-                  <div className="fixed inset-0 z-10" onClick={() => setShowNotifs(false)} />
-                  <div className="absolute right-0 top-12 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-20 max-h-96 overflow-y-auto">
-                    <div className="p-4 border-b border-gray-100">
-                      <h3 className="font-bold text-gray-800 text-sm">Notificaciones</h3>
-                      <p className="text-xs text-gray-400">{notificaciones.length} alertas activas</p>
-                    </div>
-                    {notificaciones.length === 0 ? (
-                      <div className="p-6 text-center text-gray-400 text-sm">
-                        <div className="text-2xl mb-2">🔔</div>
-                        Todo en orden, sin alertas
+                {showNotifs && (
+                  <>
+                    <div className="fixed inset-0 z-10" onClick={() => setShowNotifs(false)} />
+                    <div className="absolute right-4 top-12 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 z-20 max-h-96 overflow-y-auto">
+                      <div className="p-4 border-b border-gray-100">
+                        <h3 className="font-bold text-gray-800 text-sm">Notificaciones</h3>
+                        <p className="text-xs text-gray-400">{notificaciones.length} alertas activas</p>
                       </div>
-                    ) : (
-                      <div className="divide-y divide-gray-50">
-                        {notificaciones.map((n, i) => (
-                          <div key={i} className="p-4 hover:bg-gray-50 transition-colors flex gap-3">
-                            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0"
-                              style={{ backgroundColor: n.bg }}>{n.icon}</div>
-                            <div className="min-w-0">
-                              <p className="text-sm font-semibold text-gray-800">{n.titulo}</p>
-                              <p className="text-xs text-gray-500 mt-0.5">{n.mensaje}</p>
-                              <p className="text-xs text-gray-300 mt-1">{n.fecha}</p>
+                      {notificaciones.length === 0 ? (
+                        <div className="p-6 text-center text-gray-400 text-sm">
+                          <div className="text-2xl mb-2">🔔</div>
+                          Todo en orden, sin alertas
+                        </div>
+                      ) : (
+                        <div className="divide-y divide-gray-50">
+                          {notificaciones.map((n, i) => (
+                            <div key={i} className="p-4 hover:bg-gray-50 transition-colors flex gap-3">
+                              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0"
+                                style={{ backgroundColor: n.bg }}>{n.icon}</div>
+                              <div className="min-w-0">
+                                <p className="text-sm font-semibold text-gray-800">{n.titulo}</p>
+                                <p className="text-xs text-gray-500 mt-0.5">{n.mensaje}</p>
+                                <p className="text-xs text-gray-300 mt-1">{n.fecha}</p>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Usuario */}
-            <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-1.5 cursor-pointer hover:bg-gray-100 transition-colors">
-              <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-xs text-white font-bold">
-                {iniciales}
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
-              <span className="text-sm font-medium text-gray-700">
-                Hola, {nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1)}
-              </span>
-              <ChevronRight size={13} className="text-gray-400" />
+
+              {/* Usuario */}
+              <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-1.5 cursor-pointer hover:bg-gray-100 transition-colors">
+                <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-xs text-white font-bold">
+                  {iniciales}
+                </div>
+                <span className="text-sm font-medium text-gray-700">
+                  Hola, {nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1)}
+                </span>
+                <ChevronRight size={13} className="text-gray-400" />
+              </div>
             </div>
           </div>
         </div>
