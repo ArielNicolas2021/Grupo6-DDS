@@ -21,6 +21,7 @@ const ListaIngresos = () => {
       finally { setLoading(false); }
     };
     fetchIngresos();
+    document.title = "Ingresos | Gestor de gastos";
   }, []);
 
   return (

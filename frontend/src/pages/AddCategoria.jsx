@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tag, FileText, CheckCircle } from "lucide-react";
 
 const AddCategoria = () => {
@@ -49,6 +49,10 @@ const AddCategoria = () => {
     INGRESO: { bg: "#dcfce7", text: "#22c55e", emoji: "💵" },
     AMBOS: { bg: "#dbeafe", text: "#3b82f6", emoji: "🔄" },
   };
+
+  useEffect(() => {
+    document.title = "Agregar categoría | Gestor de gastos";
+  }, [])
 
   return (
     <div className="p-6 flex items-start justify-center" style={{ background: "#f0f4ff", minHeight: "100%" }}>

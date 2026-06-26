@@ -10,7 +10,10 @@ const ListaGastos = () => {
   const [editando, setEditando] = useState(null);
   const [formEdit, setFormEdit] = useState({});
 
-  useEffect(() => { fetchGastos(); }, []);
+  useEffect(() => {
+    fetchGastos();
+    document.title = "Gastos | Gestor de gastos";
+  }, []);
 
   const fetchGastos = async () => {
     try {

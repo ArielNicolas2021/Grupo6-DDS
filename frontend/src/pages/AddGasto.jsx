@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DollarSign, Tag, Calendar, FileText, CheckCircle } from "lucide-react";
 
 const AddGasto = () => {
@@ -52,9 +52,12 @@ const AddGasto = () => {
     finally { setLoading(false); }
   };
 
+  useEffect(() => {
+    document.title = "Agregar gasto | Gestor de gastos";
+  }, [])
+
   const inputClass = (field) =>
-    `w-full pl-10 pr-4 py-2.5 border rounded-xl text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-      errors[field] ? "border-red-400" : "border-gray-200"
+    `w-full pl-10 pr-4 py-2.5 border rounded-xl text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors[field] ? "border-red-400" : "border-gray-200"
     }`;
 
   return (
@@ -72,7 +75,7 @@ const AddGasto = () => {
 
         {success && (
           <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-600 text-sm rounded-xl px-4 py-3 mb-4">
-            <CheckCircle size={16}/> ¡Gasto registrado exitosamente!
+            <CheckCircle size={16} /> ¡Gasto registrado exitosamente!
           </div>
         )}
 

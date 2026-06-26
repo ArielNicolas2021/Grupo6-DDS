@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tag, Search } from "lucide-react";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
@@ -40,6 +40,10 @@ const FiltroCategorias = () => {
   };
 
   const categoriaNombre = categorias.find(c => c.id === categoriaId)?.nombre;
+
+  useEffect(() => {
+    document.title = "Filtrar por categoría | Gestor de gastos";
+  }, [])
 
   return (
     <div className="p-6" style={{ background: "#f0f4ff", minHeight: "100%" }}>

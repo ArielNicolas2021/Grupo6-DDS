@@ -118,6 +118,7 @@ export default function Dashboard() {
     };
 
     fetchData();
+    document.title = "Inicio | Gestor de gastos";
   }, []);
 
   const balance = ingresosMes - gastosMes;

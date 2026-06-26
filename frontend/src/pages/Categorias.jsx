@@ -19,6 +19,7 @@ const Categorias = () => {
       finally { setLoading(false); }
     };
     fetchCategorias();
+    document.title = "Categorías | Gestor de gastos";
   }, []);
 
   const gastos   = categorias.filter(c => c.tipo === "GASTO"   || c.tipo === "AMBOS");

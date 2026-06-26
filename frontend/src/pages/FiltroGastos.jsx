@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Calendar, Search } from "lucide-react";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
@@ -28,6 +28,10 @@ const FiltroGastos = () => {
     } catch { setError("No se pudo conectar con el servidor."); }
     finally { setLoading(false); }
   };
+
+  useEffect(() => {
+    document.title = "Filtrar por fecha | Gestor de gastos";
+  }, [])
 
   return (
     <div className="p-6" style={{ background: "#f0f4ff", minHeight: "100%" }}>
