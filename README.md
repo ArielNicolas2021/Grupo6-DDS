@@ -1,39 +1,35 @@
 # Sistema de Gestión de Gastos Personales
 
-## 📋 Descripción del Proyecto
+## Tabla de contenidos
 
-Sistema web diseñado para ayudar a las personas a llevar un control eficiente de sus ingresos, gastos y movimientos financieros, permitiendo obtener una visión clara de su situación económica y mejorar la administración de sus finanzas personales.
+- [Descripción del proyecto](#-descripción)
+- [Objetivos](#-objetivos)
+- [Funcionalidades](#-funcionalidades)
+- [Capturas de pantalla](#-capturas-de-pantalla)
+- [Tecnologías utilizadas](#-tecnologías-utilizadas)
+- [Uso de la aplicación](#-uso-de-la-aplicación)
+- [Documentación técnica](#-documentación-técnica)
+  - [Arquitectura del sistema](#arquitectura-del-sistema)
+  - [Diagramas](#diagramas)
+- [Equipo de desarrollo](#-equipo-de-desarrollo)
+- [Mejoras futuras](#-mejoras-futuras)
+- [Licencia](#-licencia)
 
-La aplicación ofrece una solución simple, intuitiva y accesible para registrar movimientos diarios, organizar gastos mediante categorías y visualizar información relevante a través de reportes y estadísticas.
+## 📋 Descripción
 
----
+Sistema web desarrollado para ayudar a las personas a administrar sus finanzas personales de forma sencilla e intuitiva. La aplicación permite registrar ingresos y gastos, organizarlos mediante categorías y visualizar reportes y estadísticas que facilitan el análisis de la situación financiera.
 
-## 🎯 Problema Detectado
+El sistema busca reemplazar el uso de planillas o anotaciones manuales, centralizando toda la información financiera en una única plataforma accesible desde cualquier dispositivo.
 
-Muchas personas administran sus finanzas de forma manual o mediante notas y planillas, lo que puede generar:
+## 🎯 Objetivos
 
-* Falta de organización.
-* Errores en los registros.
-* Pérdida de información.
-* Dificultad para controlar los gastos mensuales.
-* Escasa visibilidad sobre los hábitos financieros.
+- Facilitar el control de las finanzas personales.
+- Centralizar la información financiera del usuario.
+- Permitir el registro de ingresos y gastos de manera organizada.
+- Mejorar la visualización de la información mediante reportes y estadísticas.
+- Ayudar al usuario a identificar hábitos de consumo y optimizar la administración de su dinero.
 
----
-
-## 💡 Solución Propuesta
-
-Se desarrolló una plataforma web que permite centralizar toda la información financiera personal en un único sistema, brindando herramientas para:
-
-* Registrar ingresos y gastos.
-* Clasificar movimientos mediante categorías.
-* Administrar métodos de pago.
-* Obtener reportes y balances.
-* Visualizar estadísticas desde un dashboard.
-* Analizar hábitos de consumo para mejorar la gestión financiera.
-
----
-
-## 🚀 Funcionalidades Principales
+## 🚀 Funcionalidades
 
 ### Autenticación de Usuarios
 
@@ -67,9 +63,9 @@ Se desarrolló una plataforma web que permite centralizar toda la información f
 * Filtrado por fechas.
 * Dashboard con información relevante y estadísticas.
 
----
+## 📸 Capturas de Pantalla
 
-## 🏗 Arquitectura del Sistema
+## 🏗 Tecnologías utilizadas
 
 La aplicación está construida bajo una arquitectura cliente-servidor.
 
@@ -106,132 +102,54 @@ Tecnologías utilizadas:
 * Docker
 * Docker Compose
 
----
+## ▶ Uso de la Aplicación
 
-## 🌐 Demo Online
+Por el momento, solo contamos con un video demostrativo de la aplicación, el cual se encuentra disponible en el siguiente enlace:
 
-La aplicación se encuentra desplegada y disponible para su utilización desde cualquier dispositivo con acceso a Internet.
+[Video Demostrativo](https://example.com/demo)
 
-🔗 **Aplicación Web:**  
-https://gestion-gastos-dds.netlify.app/
+## 📚 Documentación técnica
 
+### Arquitectura del sistema
 
----
+La aplicación implementa una arquitectura Cliente-Servidor, donde:
 
-### Credenciales de Prueba
+- Frontend: responsable de la interfaz de usuario y la experiencia del usuario.
+- Backend: encargado de la lógica de negocio, autenticación y acceso a la base de datos.
+- Base de datos: almacena toda la información financiera del usuario.
 
-Para facilitar la evaluación del sistema, se dispone del siguiente usuario de demostración:
+### Diagramas
 
-**Email**
+- [Diagrama de entidad-relación](https://example.com/er-diagram)
+- [Diagrama de clases](https://example.com/class-diagram)
+- [Diagrama de casos de uso](https://example.com/use-case-diagram)
+- [Flujo de usuario](https://example.com/user-flow)
 
-```text
-ariel@gmail.com
-```
+## 👥 Equipo de desarrollo
 
-**Contraseña**
+- Gabriel Benítez — Frontend Developer
+- Ariel Aguilar — Backend Developer / Scrum Master
+- Rocco Díaz — Backend Developer
+- Micaela Cafardo — QA Tester
 
-```text
-Ariel2002.
-```
+El proyecto fue desarrollado utilizando la metodología ágil Scrum, favoreciendo una evolución continua y organizada del producto.
 
----
+## 🚀 Mejoras futuras
 
-## Estado del Servicio
+Entre las funcionalidades planificadas para futuras versiones se encuentran:
 
-| Servicio | Estado |
-|-----------|--------|
-| Frontend | 🟢 Online |
-| Backend | 🟢 Online |
-| Base de Datos | 🟢 Online |
-| API REST | 🟢 Disponible |
-
-## 🛠 Stack Tecnológico
-
-| Capa                 | Tecnología            |
-| -------------------- | --------------------- |
-| Frontend             | React                 |
-| Estilos              | TailwindCSS           |
-| Backend              | Java + Spring Boot    |
-| Seguridad            | Spring Security + JWT |
-| Base de Datos        | MySQL                 |
-| ORM                  | Spring Data JPA       |
-| Testing              | JUnit                 |
-| Contenedores         | Docker                |
-| Control de versiones | Git + GitHub          |
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-gestion-gastos-negocio/
-
-├── frontend/
-├── backend/
-├── database/
-├── docker/
-├── docs/
-├── qa/
-├── docker-compose.yml
-├── README.md
-└── .env.example
-```
-
----
-
-## 🔐 Seguridad
-
-La aplicación implementa:
-
-* Autenticación mediante JWT.
-* Contraseñas encriptadas.
-* Protección de endpoints.
-* Manejo seguro de sesiones.
-* Validación de datos.
-
----
-
-## 📈 Beneficios
-
-* Mayor organización financiera.
-* Mejor control de los gastos diarios.
-* Acceso rápido a la información.
-* Reducción de errores en los registros.
-* Reportes y estadísticas en tiempo real.
-* Comprensión de los hábitos de consumo.
-
----
-
-## 👥 Equipo de Desarrollo
-
-El proyecto fue desarrollado por un equipo conformado por:
-
-* Frontend Developer
-* Backend Developer
-* QA Tester
-* Scrum Master
-
-Trabajando bajo una metodología ágil basada en Scrum, permitiendo una evolución continua y organizada del producto.
-
----
-
-## 🔮 Escalabilidad Futura
-
-El sistema fue diseñado para permitir futuras mejoras, tales como:
-
-* Exportación a PDF y Excel.
-* Gráficos y estadísticas avanzadas.
-* Presupuestos mensuales y objetivos de ahorro.
-* Recordatorios de pagos y vencimientos.
-* Notificaciones personalizadas.
-* Aplicación móvil.
-* Integración con billeteras virtuales y bancos.
-* Análisis predictivo de gastos.
-
----
+- Exportación de reportes a PDF y Excel.
+- Gráficos y estadísticas avanzadas.
+- Presupuestos mensuales.
+- Objetivos de ahorro.
+- Recordatorios de pagos y vencimientos.
+- Notificaciones personalizadas.
+- Aplicación móvil.
+- Integración con bancos y billeteras virtuales.
+- Análisis predictivo de gastos mediante inteligencia artificial.
 
 ## 📄 Licencia
 
-Proyecto desarrollado con fines académicos y de aprendizaje.
+Este proyecto fue desarrollado con fines académicos y de aprendizaje.
 
 © 2026 - Sistema de Gestión de Gastos Personales. Todos los derechos reservados.
