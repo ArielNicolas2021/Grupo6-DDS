@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../services/api";
 
 const fmt = (n) => new Intl.NumberFormat("es-AR").format(Math.abs(n));
 
@@ -65,7 +66,7 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         // Gastos del mes
-        const gRes = await fetch("https://gestiongastos.duckdns.org/api/gastos/por-fecha?tipo=MES", { headers });
+        const gRes = await fetch(`${API_URL}/gastos/por-fecha?tipo=MES`, { headers });
         if (gRes.ok) {
           const gData = await gRes.json();
           setGastosMes(gData.total || 0);
@@ -98,7 +99,7 @@ export default function Dashboard() {
         }
 
         // Ingresos del mes
-        const iRes = await fetch("https://gestiongastos.duckdns.org/api/ingresos", { headers });
+        const iRes = await fetch(`${API_URL}/ingresos`, { headers });
         if (iRes.ok) {
           const iData = await iRes.json();
           const hoy = new Date();

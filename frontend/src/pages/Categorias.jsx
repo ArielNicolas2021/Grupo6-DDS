@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../services/api";
 
 const Categorias = () => {
   const [categorias, setCategorias] = useState([]);
@@ -9,7 +10,7 @@ const Categorias = () => {
     const fetchCategorias = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://gestiongastos.duckdns.org/api/categorias", {
+        const response = await fetch(`${API_URL}/categorias`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) { setError("No se pudieron cargar las categorías."); return; }

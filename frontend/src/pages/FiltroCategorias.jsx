@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag, Search } from "lucide-react";
+import { API_URL } from "../services/api";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
 
@@ -27,7 +28,7 @@ const FiltroCategorias = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://gestiongastos.duckdns.org/api/gastos/categoria/${categoriaId}`,
+        `${API_URL}/gastos/categoria/${categoriaId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) { setError("Error al filtrar los gastos."); return; }

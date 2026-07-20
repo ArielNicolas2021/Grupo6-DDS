@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag, FileText, CheckCircle } from "lucide-react";
+import { API_URL } from "../services/api";
 
 const AddCategoria = () => {
   const [formData, setFormData] = useState({ nombre: "", descripcion: "", tipo: "" });
@@ -28,7 +29,7 @@ const AddCategoria = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://gestiongastos.duckdns.org/api/categorias", {
+      const response = await fetch(`${API_URL}/categorias`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(formData),

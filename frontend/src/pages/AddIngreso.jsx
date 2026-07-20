@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DollarSign, Tag, Calendar, FileText, CheckCircle } from "lucide-react";
+import { API_URL } from "../services/api";
 
 const AddIngreso = () => {
   const [formData, setFormData] = useState({ monto: "", categoriaId: "", fecha: "", descripcion: "" });
@@ -31,7 +32,7 @@ const AddIngreso = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://gestiongastos.duckdns.org/api/ingresos", {
+      const response = await fetch(`${API_URL}/ingresos`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({

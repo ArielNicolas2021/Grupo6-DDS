@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Pencil, Trash2, X, Check } from "lucide-react";
+import { API_URL } from "../services/api";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
 
@@ -18,7 +19,7 @@ const ListaGastos = () => {
   const fetchGastos = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://gestiongastos.duckdns.org/api/gastos", {
+      const response = await fetch(`${API_URL}/gastos`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) { setError("No se pudieron cargar los gastos."); return; }
@@ -35,7 +36,7 @@ const ListaGastos = () => {
     if (!window.confirm("¿Eliminar este gasto?")) return;
     try {
       const token = localStorage.getItem("token");
-      await fetch(`https://gestiongastos.duckdns.org/api/gastos/${id}`, {
+      await fetch(`${API_URL}/gastos/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -46,7 +47,7 @@ const ListaGastos = () => {
   const handleGuardar = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`https://gestiongastos.duckdns.org/api/gastos/${id}`, {
+      const response = await fetch(`${API_URL}/gastos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...formEdit, monto: Number(formEdit.monto) }),

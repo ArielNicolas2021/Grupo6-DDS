@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../services/api";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
 
@@ -11,7 +12,7 @@ const ListaIngresos = () => {
     const fetchIngresos = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://gestiongastos.duckdns.org/api/ingresos", {
+        const response = await fetch(`${API_URL}/ingresos`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) { setError("No se pudieron cargar los ingresos."); return; }

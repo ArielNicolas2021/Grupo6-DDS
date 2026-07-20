@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Calendar, Search } from "lucide-react";
+import { API_URL } from "../services/api";
 
 const fmt = (n) => Number(n).toLocaleString("es-AR");
 
@@ -17,7 +18,7 @@ const FiltroGastos = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://gestiongastos.duckdns.org/api/gastos/por-fecha?desde=${fechaDesde}&hasta=${fechaHasta}`,
+        `${API_URL}/gastos/por-fecha?desde=${fechaDesde}&hasta=${fechaHasta}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) { setError("Error al filtrar los gastos."); return; }
