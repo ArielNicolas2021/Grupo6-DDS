@@ -2,7 +2,6 @@ package com.example.app.categoria.service;
 
 import com.example.app.categoria.dto.CategoriaRequestDTO;
 import com.example.app.categoria.dto.CategoriaResponseDTO;
-import com.example.app.exception.EmailAlreadyExistsException;
 import com.example.app.exception.ResourceNotFoundException;
 import com.example.app.exception.UnauthorizedAccessException;
 import com.example.app.models.Categoria;
