@@ -1,5 +1,7 @@
 # Sistema de Gestión de Gastos Personales
 
+![Foto del sistema](docs\Gestion-de-gastos.png)
+
 ## Tabla de contenidos
 
 - [Descripción del proyecto](#-descripción)
@@ -65,6 +67,9 @@ El sistema busca reemplazar el uso de planillas o anotaciones manuales, centrali
 
 ## 📸 Capturas de Pantalla
 
+![Captura de pantalla](docs\gestion_gastos.png)
+![Captura de pantalla mobile](docs\gestion_gastos_mobile.png)
+
 ## 🏗 Tecnologías utilizadas
 
 La aplicación está construida bajo una arquitectura cliente-servidor.
@@ -106,7 +111,7 @@ Tecnologías utilizadas:
 
 Por el momento, solo contamos con un video demostrativo de la aplicación, el cual se encuentra disponible en el siguiente enlace:
 
-[Video Demostrativo](https://example.com/demo)
+[Video Demostrativo](https://youtu.be/UR1UAw2U6vk)
 
 ## 📚 Documentación técnica
 
@@ -120,7 +125,7 @@ La aplicación implementa una arquitectura Cliente-Servidor, donde:
 
 ### Diagramas
 
-- [Diagrama de entidad-relación](https://example.com/er-diagram)
+- [Diagrama de entidad-relación](https://github.com/ArielNicolas2021/Grupo6-DDS/blob/main/docs/gestion_gastos_der.png)
 - [Diagrama de clases](https://example.com/class-diagram)
 - [Diagrama de casos de uso](https://example.com/use-case-diagram)
 - [Flujo de usuario](https://example.com/user-flow)
