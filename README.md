@@ -67,8 +67,8 @@ El sistema busca reemplazar el uso de planillas o anotaciones manuales, centrali
 
 ## 📸 Capturas de Pantalla
 
-![Captura de pantalla](./docs/Gestion-de-gastos.png)
-![Captura de pantalla mobile](./docs/Gestion-de-gastos-mobile.png)
+![Captura de pantalla](./docs/gestion_gastos.png)
+![Captura de pantalla mobile](./docs/gestion_gastos_mobile.png)
 
 ## 🏗 Tecnologías utilizadas
 
