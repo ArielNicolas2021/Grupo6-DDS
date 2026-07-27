@@ -1,6 +1,6 @@
 # Sistema de Gestión de Gastos Personales
 
-![Foto del sistema](docs\Gestion-de-gastos.png)
+![Foto del sistema](./docs/Gestion-de-gastos.png)
 
 ## Tabla de contenidos
 
@@ -67,8 +67,8 @@ El sistema busca reemplazar el uso de planillas o anotaciones manuales, centrali
 
 ## 📸 Capturas de Pantalla
 
-![Captura de pantalla](docs\gestion_gastos.png)
-![Captura de pantalla mobile](docs\gestion_gastos_mobile.png)
+![Captura de pantalla](./docs/Gestion-de-gastos.png)
+![Captura de pantalla mobile](./docs/Gestion-de-gastos-mobile.png)
 
 ## 🏗 Tecnologías utilizadas
 
