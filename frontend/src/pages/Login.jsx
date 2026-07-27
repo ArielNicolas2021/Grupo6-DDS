@@ -21,6 +21,7 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       if (!response.ok) {
+        console.log("Respuesta del login:", await response.json()); // ← agregá esta línea
         setError("Credenciales incorrectas. Intentá de nuevo.");
         return;
       }
