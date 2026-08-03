@@ -1,6 +1,6 @@
 # Sistema de Gestión de Gastos Personales
 
-![Foto del sistema](./docs/Gestion-de-gastos.png)
+![Portada](./docs/gestion_gastos_portada.png)
 
 ## Tabla de contenidos
 
