@@ -4,18 +4,29 @@
 
 ## Tabla de contenidos
 
-- [Descripción del proyecto](#-descripción)
-- [Objetivos](#-objetivos)
-- [Funcionalidades](#-funcionalidades)
-- [Capturas de pantalla](#-capturas-de-pantalla)
-- [Tecnologías utilizadas](#-tecnologías-utilizadas)
-- [Uso de la aplicación](#-uso-de-la-aplicación)
-- [Documentación técnica](#-documentación-técnica)
-  - [Arquitectura del sistema](#arquitectura-del-sistema)
-  - [Diagramas](#diagramas)
-- [Equipo de desarrollo](#-equipo-de-desarrollo)
-- [Mejoras futuras](#-mejoras-futuras)
-- [Licencia](#-licencia)
+- [Sistema de Gestión de Gastos Personales](#sistema-de-gestión-de-gastos-personales)
+  - [Tabla de contenidos](#tabla-de-contenidos)
+  - [📋 Descripción](#-descripción)
+  - [🎯 Objetivos](#-objetivos)
+  - [🚀 Funcionalidades](#-funcionalidades)
+    - [Autenticación de Usuarios](#autenticación-de-usuarios)
+    - [Gestión Financiera Personal](#gestión-financiera-personal)
+    - [Gestión de Movimientos](#gestión-de-movimientos)
+    - [Categorías](#categorías)
+    - [Reportes y Estadísticas](#reportes-y-estadísticas)
+  - [📸 Capturas de Pantalla](#-capturas-de-pantalla)
+  - [🏗 Tecnologías utilizadas](#-tecnologías-utilizadas)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+    - [Base de Datos](#base-de-datos)
+    - [Contenedores](#contenedores)
+  - [▶ Uso de la Aplicación](#-uso-de-la-aplicación)
+  - [📚 Documentación técnica](#-documentación-técnica)
+    - [Arquitectura del sistema](#arquitectura-del-sistema)
+    - [Diagramas](#diagramas)
+  - [👥 Equipo de desarrollo](#-equipo-de-desarrollo)
+  - [🚀 Mejoras futuras](#-mejoras-futuras)
+  - [📄 Licencia](#-licencia)
 
 ## 📋 Descripción
 
@@ -126,9 +137,6 @@ La aplicación implementa una arquitectura Cliente-Servidor, donde:
 ### Diagramas
 
 - [Diagrama de entidad-relación](https://github.com/ArielNicolas2021/Grupo6-DDS/blob/main/docs/gestion_gastos_der.png)
-- [Diagrama de clases](https://example.com/class-diagram)
-- [Diagrama de casos de uso](https://example.com/use-case-diagram)
-- [Flujo de usuario](https://example.com/user-flow)
 
 ## 👥 Equipo de desarrollo
 
