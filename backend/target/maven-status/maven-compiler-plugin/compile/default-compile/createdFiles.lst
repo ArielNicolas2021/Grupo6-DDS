@@ -1,0 +1,5 @@
+com\example\app\ingreso\dto\IngresoResponseDTO.class
+com\example\app\models\Categoria.class
+com\example\app\gasto\dto\GastoResponseDTO.class
+com\example\app\repositories\CategoriaRepository.class
+com\example\app\models\Categoria$TipoCategoria.class
