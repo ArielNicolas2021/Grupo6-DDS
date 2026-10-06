@@ -10,7 +10,7 @@ const Categorias = () => {
     const fetchCategorias = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`${API_URL}/categorias`, {
+        const response = await fetch(`${API_URL}/api/categorias`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) { setError("No se pudieron cargar las categorías."); return; }

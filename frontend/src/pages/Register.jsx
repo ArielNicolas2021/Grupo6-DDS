@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User, CheckCircle, Plus } from "lucide-react";
+import { API_URL } from "../services/api";
 
 export default function Register() {
   const [showPass, setShowPass] = useState(false);
@@ -22,7 +23,7 @@ export default function Register() {
     }
     setLoading(true); setError("");
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

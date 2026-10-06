@@ -29,7 +29,7 @@ const AddCategoria = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_URL}/categorias`, {
+      const response = await fetch(`${API_URL}/api/categorias`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(formData),

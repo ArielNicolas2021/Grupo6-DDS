@@ -28,7 +28,7 @@ const FiltroCategorias = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${API_URL}/gastos/categoria/${categoriaId}`,
+        `${API_URL}/api/gastos/categoria/${categoriaId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) { setError("Error al filtrar los gastos."); return; }

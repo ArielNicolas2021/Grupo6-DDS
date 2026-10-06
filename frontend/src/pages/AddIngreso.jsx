@@ -32,7 +32,7 @@ const AddIngreso = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_URL}/ingresos`, {
+      const response = await fetch(`${API_URL}/api/ingresos`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
+import { API_URL } from "../services/api";
 
 export default function Login() {
   const [showPass, setShowPass] = useState(false);
@@ -15,7 +16,7 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

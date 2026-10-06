@@ -19,7 +19,7 @@ const ListaGastos = () => {
   const fetchGastos = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_URL}/gastos`, {
+      const response = await fetch(`${API_URL}/api/gastos`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) { setError("No se pudieron cargar los gastos."); return; }

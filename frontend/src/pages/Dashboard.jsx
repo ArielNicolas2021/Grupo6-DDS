@@ -66,7 +66,7 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         // Gastos del mes
-        const gRes = await fetch(`${API_URL}/gastos/por-fecha?tipo=MES`, { headers });
+        const gRes = await fetch(`${API_URL}/api/gastos/por-fecha?tipo=MES`, { headers });
         if (gRes.ok) {
           const gData = await gRes.json();
           setGastosMes(gData.total || 0);

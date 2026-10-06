@@ -32,7 +32,7 @@ const AddGasto = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_URL}/gastos`, {
+      const response = await fetch(`${API_URL}/api/gastos`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
